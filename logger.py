@@ -1,11 +1,11 @@
 from flask import Flask
 import logging
 
-logging.basicConfig(filename='record.log', level=logging.DEBUG)
+logging.basicConfig(level=logging.DEBUG)
 app = Flask(__name__)
 
 
-@app.route('/logger')
+@app.route('/')
 def main():
     # showing different logging levels
     app.logger.debug("debug log info")
