@@ -5,7 +5,7 @@ logging.basicConfig(level=logging.DEBUG)
 app = Flask(__name__)
 
 
-@app.route('/')
+@app.route('/', methods=["GET"])
 def main():
     # showing different logging levels
     app.logger.debug("debug log info")
