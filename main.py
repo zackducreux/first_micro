@@ -1,7 +1,28 @@
 from flask import Flask
+import sys
 
 app = Flask(__name__)
 
+
+# import the TrendReq method from the pytrends request module
+from pytrends.request import TrendReq
+import pandas as pd
+import flask
+
+# execute the TrendReq method by passing the host language (hl) and timezone (tz) parameters
+pytrends = TrendReq(hl='en-US', tz=360)
+
+# build list of keywords
+kw_list = ["ai", "chicken", "space"]
+
+# build the payload
+pytrends.build_payload(kw_list, timeframe='2015-01-01 2015-03-31', geo='US')
+
+# store interest over time information in df
+df = pytrends.interest_over_time()
+
+# display the top 20 rows in dataframe
+print(df)
 
 @app.route('/name', methods=["GET"])
 def hello_world():
@@ -18,6 +39,7 @@ src="https://www.googletagmanager.com/gtag/js?id=UA-250386229-1"></script>
  """
     return prefix_google + "Hello World & Zackary Ducreux"
 
+
 @app.route("/")
 def hello():
     app.logger.debug("A debug message")
@@ -25,15 +47,20 @@ def hello():
     app.logger.warning("A warning message")
     app.logger.error("An error message")
     app.logger.critical("A critical message")
-
+    print('This is error output', file=sys.stderr)
+    print('This is standard output', file=sys.stdout)
     return "Hello, World, no error for now!"
+
 
 @app.route("/info")
 def info():
     app.logger.info("Hello, World!")
-    return "Hello, World! (info)"
+    return f"Hello, World! (info) {df}"
 
-@app.route("/warning")
-def warning():
-    app.logger.warning("A warning message.")
-    return "A warning message. (warning)"
+
+@app.route('/Logger', methods=["GET"])
+def logger():
+    page="""
+    <script> console.log('aie')</script>
+    """
+    return 'console'+page
