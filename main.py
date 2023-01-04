@@ -54,8 +54,8 @@ def hello():
 
 @app.route("/info")
 def info():
-    app.logger.info("Hello, World!")
-    return f"Hello, World! (info) {df}"
+    app.logger.info(f"Hello, World! {df}")
+    return f"Hello, World! {df}"
 
 
 @app.route('/Logger', methods=["GET"])
