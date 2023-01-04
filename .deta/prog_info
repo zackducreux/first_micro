@@ -1,1 +1,1 @@
-{"id":"cca6c7f1-a920-425f-bc95-a76f5d2f3b81","space":40512,"runtime":"python3.9","name":"first_micro","path":"81tq37","project":"a0ilwch4","account":"144798365827","region":"eu-central-1","deps":["flask"],"envs":null,"public":true,"log_level":"off","cron":""}
+{"id":"cca6c7f1-a920-425f-bc95-a76f5d2f3b81","space":40512,"runtime":"python3.9","name":"first_micro","path":"81tq37","project":"a0ilwch4","account":"144798365827","region":"eu-central-1","deps":["flask~=2.2.2","pytrends~=4.8.0"],"envs":null,"public":true,"log_level":"off","cron":""}

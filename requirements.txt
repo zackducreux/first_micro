@@ -1,2 +1,1 @@
-flask~=2.2.2
-pytrends~=4.8.0
+flask
