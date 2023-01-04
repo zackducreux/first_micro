@@ -1,10 +1,10 @@
 # import the TrendReq method from the pytrends request module
+from matplotlib import pyplot as plt
 from pytrends.request import TrendReq
 from flask import Flask, render_template
 import sys
 
 app = Flask(__name__)
-
 
 # execute the TrendReq method by passing the host language (hl) and timezone (tz) parameters
 pytrends = TrendReq(hl='en-US', tz=360)
@@ -47,7 +47,6 @@ def hello():
     return "Hello, World, no error for now!"
 
 
-
 @app.route("/info")
 def info():
     app.logger.info(f"Hello, World! {df}")
@@ -61,8 +60,10 @@ def chart():
     values = [10, 9, 8, 7, 6, 4, 7, 8]
     return render_template('chart.html', values=values, labels=labels, legend=legend)
 
+
 if __name__ == "__main__":
     app.run(debug=True)
+
 
 @app.route('/Logger', methods=["GET"])
 def logger():
@@ -70,3 +71,30 @@ def logger():
     <script> console.log('aie')</script>
     """
     return 'console' + page
+
+
+def plot_searchterms(df):
+    """Plots google trends
+
+    Parameters
+    ----------
+    df: pandas dataframe
+        As returned from pytrends, without the "isPartial" column
+
+    Returns
+    -------
+    ax: axis handle
+    """
+    fig = plt.figure(figsize=(15, 8))
+    ax = fig.add_subplot(111)
+    df.plot(ax=ax)
+    plt.ylabel('Relative search term frequency')
+    plt.xlabel('Date')
+    plt.ylim((0, 120))
+    plt.legend(loc='lower left')
+    return ax
+
+
+plt.style.use('ggplot')
+ax = plot_searchterms(df)
+plt.show()
