@@ -8,13 +8,10 @@ app = Flask(__name__)
 
 # execute the TrendReq method by passing the host language (hl) and timezone (tz) parameters
 pytrends = TrendReq(hl='en-US', tz=360)
-
 # build list of keywords
 kw_list = ["ai", "chicken", "space"]
-
 # build the payload
 pytrends.build_payload(kw_list, timeframe='2015-01-01 2015-03-31', geo='US')
-
 # store interest over time information in df
 df = pytrends.interest_over_time()
 
