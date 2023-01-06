@@ -59,24 +59,17 @@ def line():
     return render_template('line_chart.html', title='Chicken through time', labels=line_labels, values=line_values)
 
 
-# @app.route("/simple_chart")
-# def chart():
-#     legend = 'Monthly Data'
-#     labels = ["January", "February", "March", "April", "May", "June", "July", "August"]
-#     values = [10, 9, 8, 7, 6, 4, 7, 8]
-#     return render_template('line_chart.html', values=values, labels=labels, legend=legend)
+@app.route("/simple_chart")
+def chart():
+    legend = 'Monthly Data'
+    labels = ["January", "February", "March", "April", "May", "June", "July", "August"]
+    values = [10, 9, 8, 7, 6, 4, 7, 8]
+    return render_template('line_chart.html', values=values, labels=labels, legend=legend)
 
 
 if __name__ == "__main__":
     app.run(debug=True)
 
-
-@app.route('/Logger', methods=["GET"])
-def logger():
-    page = """
-    <script> console.log('aie')</script>
-    """
-    return 'console' + page
 
 
 def plot_searchterms(df):
